@@ -5,10 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 
-                sh 'sudo apt-get update'
-                sh 'sudo apt-get install -y cmake'
-                sh 'cmake .'
-                sh 'make'
+                sh 'g++ -o PES1UG20CS657 PES1UG20CS657.cpp'
+                build job: 'PES1UG20CS657-1'
                 echo 'Build Stage Successful'
             }
         }
@@ -16,7 +14,7 @@ pipeline {
         stage('Test') {
             steps {
                 
-                sh 'ctest --output-on-failure'
+                sh './PES1UG20CS657'
                 echo 'Test Stage Successful'
             }
         }
@@ -24,7 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 
-                sh 'scp ./myapp user@server:/path/to/deploy'
+                
                 echo 'Deployment Successful'
             }
         }
